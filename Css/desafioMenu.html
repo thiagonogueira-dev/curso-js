@@ -7,7 +7,85 @@
     <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <style>
-        /* ... */
+        body{
+            background-color: lightgray;
+            font-family: Oswald, sans-serif;
+        }
+
+        body, ul{
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu-toggle{
+            display: none;
+        }
+
+        a, li{
+            text-decoration: none;
+            list-style: none;
+            display: inline-block;
+            color: white;
+        }
+
+        li a{
+            padding: 15px 5px;
+            margin-right: 5px;
+        }
+
+        .menu a:hover, .menu a.selected{
+            background-color: #4faddb;
+            color: black;
+        }
+
+        .cabecalho{
+            display: flex;
+            flex-direction: row;
+            background-color: black;
+            padding: 10px;
+            border-bottom: solid 2px rgb(0, 0, 249);
+        }
+
+        .logo, .menu, .logo a, .logo img{
+            width: 300px;
+            position: relative;
+        }
+
+        .menu{
+            margin-top: 5px;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .autenticacao{
+            width: 150px;
+            position: absolute;
+            right: 0;
+            padding: 10px 5px;
+        }
+
+        .autenticacao a{
+            margin: 0px 5px;
+            padding: 10px;
+        }
+
+        .autenticacao a:nth-child(2){
+            background-color: rgb(200, 23, 7);
+            border-radius: 20px;
+        }
+
+        @media (max-width: 750px){
+            .menu-toggle{
+                display: block;
+                position: absolute;
+                right: 0;
+                margin: 20px 10px;
+            }
+
+            .menu, .autenticacao{
+                display: none;
+            }
+        }
     </style>
 </head>
 
@@ -44,7 +122,16 @@
     </header>
 
     <script>
-        // ...
+        window.addEventListener('hashchange', e =>{
+            const oldURL = e.oldURL.split('#')[1];
+            const newURL = e.newURL.split('#')[1];
+            
+            const oldMenu = document.querySelector(`.menu a[href='#${oldURL}']`)
+            const newMenu = document.querySelector(`.menu a[href='#${newURL}']`)
+
+            oldMenu.classList.remove('selected');
+            newMenu.classList.add('selected');
+        })
     </script>
 </body>
 
