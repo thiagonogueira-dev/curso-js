@@ -29,6 +29,38 @@
     </form>
     <div id="resultado"></div>
     <script>
-        // ...
+        document.usuarioForm.onsubmit = async e =>{
+            e.preventDefault();
+
+            const form = e.target;
+            const data = new FormData(form);
+            data.append('ajax', true);
+
+            const options = {
+                method: form.method,
+                body: new URLSearchParams(data)
+            }
+
+            // fetch(form.action, options)
+            //     .then(resp => resp.json())
+            //     .then(json =>{
+            //         const resultado = document.getElementById('resultado');
+            //         resultado.innerHTML = JSON.stringify(json);
+            //     })
+            //     .catch(e =>{
+            //         const resultado = document.getElementById('resultado');
+            //         resultado.innerHTML = e.message;
+            //     })
+
+            try{
+                const resp = await fetch(form.action, options);
+                const json = await resp.json();
+                const resultado = document.getElementById('resultado');
+                resultado.innerHTML = JSON.stringify(json);
+            } catch(e){
+                const resultado = document.getElementById('resultado');
+                resultado.innerHTML = e.message;
+            }
+        }
     </script>
 </body>
