@@ -162,11 +162,17 @@ function FlappyBird(){
             passaro.animar();
 
             if(colidiu(passaro, barreiras)){
+                document.querySelector('[restart]').style.display = 'block';
                 clearInterval(temporizador);
             }
         }, 20);
     }
 }
 
+document.querySelector('[restart]').addEventListener('click', () =>{
+    document.querySelector('[wm-flappy]').innerHTML = '';
+    document.querySelector('[restart]').style.display = 'none';
+    new FlappyBird().start();
+})
 
 new FlappyBird().start();

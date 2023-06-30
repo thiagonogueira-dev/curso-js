@@ -62,3 +62,14 @@
     font-size: 70px;
     z-index: 100;
 }
+
+[restart]{
+    width: 120px;
+    height: 120px;
+    position: absolute;
+    top: 42%;
+    left: 50%;
+    z-index: 1;
+    cursor: pointer;
+    display: none;
+}
