@@ -1,11 +1,13 @@
 <template>
     <div class="door-area">
-        <div class="door-frame">
+        <div class="door-frame" :class="{ selected: selected && !open }">
             <Gift v-if="open && hasGift" />    
         </div>
-        <div class="door">
-            <div class="number">{{ number }}</div>
-            <div class="knob"></div>
+        <div class="door" :class="{ open }" 
+            @click="selected = !selected">
+            <div class="number" :class="{ selected }">{{ number }}</div>
+            <div class="knob" :class="{ selected }"
+                @click.stop="open = true"></div>
         </div>
     </div>
 </template>
@@ -31,7 +33,8 @@ export default {
 
 <style>
 :root {
-    --door-border: 5px solid brown;   
+    --door-border: 5px solid brown;
+    --selected-border: 5px solid yellow;
 }
 
 .door-area {
@@ -62,5 +65,49 @@ export default {
 
 .door {
     position: absolute;
+    top: 5px;
+    height: 295px;
+    width: 170px;
+    background-color: chocolate;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.door .knob {
+    height: 20px;
+    width: 20px;
+    border-radius: 10px;
+    background-color: brown;
+    align-self: flex-start;
+    margin-top: 60px;
+}
+
+.door-frame.selected {
+    border-left: var(--selected-border);
+    border-top: var(--selected-border);
+    border-right: var(--selected-border);
+}
+
+.door .number.selected {
+    color: yellow;
+}
+
+.door .knob.selected {
+    background-color: yellow;
+}
+
+.door.open {
+    background-color: #0007;
+}
+
+.door.open .knob {
+    display: none;
+}
+
+.door.open .number {
+    display: none;
 }
 </style>
